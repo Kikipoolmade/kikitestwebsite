@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kiki Tennis</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: green;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 100px;
+      font-weight: bold;
+      color: purple;
+      z-index: 1;
+    }
+
+    .top-right {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 14px;
+      color: white;
+      z-index: 2;
+    }
+
+    .random-element {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .random-text {
+      font-size: 24px;
+      color: pink;
+    }
+
+    .tennisbal {
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-right">master made</div>
+  <div class="center-text">KIKI</div>
+
+  <script>
+    function randomPosition(maxWidth, maxHeight, elementWidth = 0, elementHeight = 0) {
+      const x = Math.random() * (maxWidth - elementWidth);
+      const y = Math.random() * (maxHeight - elementHeight);
+      return { x, y };
+    }
+
+    window.onload = () => {
+      const body = document.body;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
+      // Voeg 5x "tennis" toe
+      for (let i = 0; i < 5; i++) {
+        const span = document.createElement('span');
+        span.classList.add('random-element', 'random-text');
+        span.innerText = 'tennis';
+        const { x, y } = randomPosition(width, height, 100, 30);
+        span.style.left = `${x}px`;
+        span.style.top = `${y}px`;
+        body.appendChild(span);
+      }
+
+      // Voeg 10x tennisbal toe
+      for (let i = 0; i < 10; i++) {
+        const img = document.createElement('img');
+        img.src = 'tennisbal.jpeg';
+        img.classList.add('random-element', 'tennisbal');
+        const { x, y } = randomPosition(width, height, 40, 40);
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        body.appendChild(img);
+      }
+    };
+  </script>
+</body>
+</html>
